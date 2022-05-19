@@ -1,0 +1,522 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ShopModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="base">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="shop_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="base_product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="price" Type="int" Nullable="false" />
+          <Property Name="base_Id" Type="int" Nullable="false" />
+          <Property Name="product_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="shop_Id" Type="int" Nullable="false" />
+          <Property Name="person_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="department_product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="price" Type="int" Nullable="false" />
+          <Property Name="department_Id" Type="int" Nullable="false" />
+          <Property Name="product_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="positon" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="shop_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="shop">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="class" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="number" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_base_productproduct">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="base_product" Type="Self.base_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="base_product">
+              <PropertyRef Name="product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_basebase_product">
+          <End Role="base" Type="Self.base" Multiplicity="1" />
+          <End Role="base_product" Type="Self.base_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="base">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="base_product">
+              <PropertyRef Name="base_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_baseshop">
+          <End Role="shop" Type="Self.shop" Multiplicity="1" />
+          <End Role="base" Type="Self.base" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shop">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="base">
+              <PropertyRef Name="shop_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_departmentdepartment_product">
+          <End Role="department" Type="Self.department" Multiplicity="1" />
+          <End Role="department_product" Type="Self.department_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="department_product">
+              <PropertyRef Name="department_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_departmentperson">
+          <End Role="person" Type="Self.person" Multiplicity="1" />
+          <End Role="department" Type="Self.department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="department">
+              <PropertyRef Name="person_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_departmentshop">
+          <End Role="shop" Type="Self.shop" Multiplicity="1" />
+          <End Role="department" Type="Self.department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shop">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="department">
+              <PropertyRef Name="shop_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_personshop">
+          <End Role="shop" Type="Self.shop" Multiplicity="1" />
+          <End Role="person" Type="Self.person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shop">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="person">
+              <PropertyRef Name="shop_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_productdepartment_product">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="department_product" Type="Self.department_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="department_product">
+              <PropertyRef Name="product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ShopModelContainer">
+          <EntitySet Name="base" EntityType="Self.base" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="base_product" EntityType="Self.base_product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="department" EntityType="Self.department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="department_product" EntityType="Self.department_product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="person" EntityType="Self.person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="shop" EntityType="Self.shop" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_base_productproduct" Association="Self.FK_base_productproduct">
+            <End Role="product" EntitySet="product" />
+            <End Role="base_product" EntitySet="base_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_basebase_product" Association="Self.FK_basebase_product">
+            <End Role="base" EntitySet="base" />
+            <End Role="base_product" EntitySet="base_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_baseshop" Association="Self.FK_baseshop">
+            <End Role="shop" EntitySet="shop" />
+            <End Role="base" EntitySet="base" />
+          </AssociationSet>
+          <AssociationSet Name="FK_departmentdepartment_product" Association="Self.FK_departmentdepartment_product">
+            <End Role="department" EntitySet="department" />
+            <End Role="department_product" EntitySet="department_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_departmentperson" Association="Self.FK_departmentperson">
+            <End Role="person" EntitySet="person" />
+            <End Role="department" EntitySet="department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_departmentshop" Association="Self.FK_departmentshop">
+            <End Role="shop" EntitySet="shop" />
+            <End Role="department" EntitySet="department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_personshop" Association="Self.FK_personshop">
+            <End Role="shop" EntitySet="shop" />
+            <End Role="person" EntitySet="person" />
+          </AssociationSet>
+          <AssociationSet Name="FK_productdepartment_product" Association="Self.FK_productdepartment_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="department_product" EntitySet="department_product" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="base">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="shop_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="base_product" Relationship="Self.FK_basebase_product" FromRole="base" ToRole="base_product" />
+          <NavigationProperty Name="shop" Relationship="Self.FK_baseshop" FromRole="base" ToRole="shop" />
+        </EntityType>
+        <EntityType Name="base_product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Int32" Nullable="false" />
+          <Property Name="base_Id" Type="Int32" Nullable="false" />
+          <Property Name="product_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="base" Relationship="Self.FK_basebase_product" FromRole="base_product" ToRole="base" />
+          <NavigationProperty Name="product" Relationship="Self.FK_base_productproduct" FromRole="base_product" ToRole="product" />
+        </EntityType>
+        <EntityType Name="department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="shop_Id" Type="Int32" Nullable="false" />
+          <Property Name="person_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="department_product" Relationship="Self.FK_departmentdepartment_product" FromRole="department" ToRole="department_product" />
+          <NavigationProperty Name="person" Relationship="Self.FK_departmentperson" FromRole="department" ToRole="person" />
+          <NavigationProperty Name="shop" Relationship="Self.FK_departmentshop" FromRole="department" ToRole="shop" />
+        </EntityType>
+        <EntityType Name="department_product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Int32" Nullable="false" />
+          <Property Name="department_Id" Type="Int32" Nullable="false" />
+          <Property Name="product_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="department" Relationship="Self.FK_departmentdepartment_product" FromRole="department_product" ToRole="department" />
+          <NavigationProperty Name="product" Relationship="Self.FK_productdepartment_product" FromRole="department_product" ToRole="product" />
+        </EntityType>
+        <EntityType Name="person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="positon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="shop_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="departments" Relationship="Self.FK_departmentperson" FromRole="person" ToRole="department" />
+          <NavigationProperty Name="shop" Relationship="Self.FK_personshop" FromRole="person" ToRole="shop" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="base_product" Relationship="Self.FK_base_productproduct" FromRole="product" ToRole="base_product" />
+          <NavigationProperty Name="department_product" Relationship="Self.FK_productdepartment_product" FromRole="product" ToRole="department_product" />
+        </EntityType>
+        <EntityType Name="shop">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="class" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="bases" Relationship="Self.FK_baseshop" FromRole="shop" ToRole="base" />
+          <NavigationProperty Name="departments" Relationship="Self.FK_departmentshop" FromRole="shop" ToRole="department" />
+          <NavigationProperty Name="people" Relationship="Self.FK_personshop" FromRole="shop" ToRole="person" />
+        </EntityType>
+        <Association Name="FK_basebase_product">
+          <End Role="base" Type="Self.base" Multiplicity="1" />
+          <End Role="base_product" Type="Self.base_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="base">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="base_product">
+              <PropertyRef Name="base_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_baseshop">
+          <End Role="shop" Type="Self.shop" Multiplicity="1" />
+          <End Role="base" Type="Self.base" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shop">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="base">
+              <PropertyRef Name="shop_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_base_productproduct">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="base_product" Type="Self.base_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="base_product">
+              <PropertyRef Name="product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_departmentdepartment_product">
+          <End Role="department" Type="Self.department" Multiplicity="1" />
+          <End Role="department_product" Type="Self.department_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="department_product">
+              <PropertyRef Name="department_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_departmentperson">
+          <End Role="person" Type="Self.person" Multiplicity="1" />
+          <End Role="department" Type="Self.department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="department">
+              <PropertyRef Name="person_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_departmentshop">
+          <End Role="shop" Type="Self.shop" Multiplicity="1" />
+          <End Role="department" Type="Self.department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shop">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="department">
+              <PropertyRef Name="shop_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_productdepartment_product">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="department_product" Type="Self.department_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="department_product">
+              <PropertyRef Name="product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_personshop">
+          <End Role="shop" Type="Self.shop" Multiplicity="1" />
+          <End Role="person" Type="Self.person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shop">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="person">
+              <PropertyRef Name="shop_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ShopEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="bases" EntityType="Self.base" />
+          <EntitySet Name="base_product" EntityType="Self.base_product" />
+          <EntitySet Name="departments" EntityType="Self.department" />
+          <EntitySet Name="department_product" EntityType="Self.department_product" />
+          <EntitySet Name="people" EntityType="Self.person" />
+          <EntitySet Name="products" EntityType="Self.product" />
+          <EntitySet Name="shops" EntityType="Self.shop" />
+          <AssociationSet Name="FK_basebase_product" Association="Self.FK_basebase_product">
+            <End Role="base" EntitySet="bases" />
+            <End Role="base_product" EntitySet="base_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_baseshop" Association="Self.FK_baseshop">
+            <End Role="shop" EntitySet="shops" />
+            <End Role="base" EntitySet="bases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_base_productproduct" Association="Self.FK_base_productproduct">
+            <End Role="product" EntitySet="products" />
+            <End Role="base_product" EntitySet="base_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_departmentdepartment_product" Association="Self.FK_departmentdepartment_product">
+            <End Role="department" EntitySet="departments" />
+            <End Role="department_product" EntitySet="department_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_departmentperson" Association="Self.FK_departmentperson">
+            <End Role="person" EntitySet="people" />
+            <End Role="department" EntitySet="departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_departmentshop" Association="Self.FK_departmentshop">
+            <End Role="shop" EntitySet="shops" />
+            <End Role="department" EntitySet="departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_productdepartment_product" Association="Self.FK_productdepartment_product">
+            <End Role="product" EntitySet="products" />
+            <End Role="department_product" EntitySet="department_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_personshop" Association="Self.FK_personshop">
+            <End Role="shop" EntitySet="shops" />
+            <End Role="person" EntitySet="people" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ShopModelContainer" CdmEntityContainer="ShopEntities">
+          <EntitySetMapping Name="bases">
+            <EntityTypeMapping TypeName="ShopModel.base">
+              <MappingFragment StoreEntitySet="base">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="shop_Id" ColumnName="shop_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="base_product">
+            <EntityTypeMapping TypeName="ShopModel.base_product">
+              <MappingFragment StoreEntitySet="base_product">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="base_Id" ColumnName="base_Id" />
+                <ScalarProperty Name="product_Id" ColumnName="product_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="departments">
+            <EntityTypeMapping TypeName="ShopModel.department">
+              <MappingFragment StoreEntitySet="department">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="shop_Id" ColumnName="shop_Id" />
+                <ScalarProperty Name="person_Id" ColumnName="person_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="department_product">
+            <EntityTypeMapping TypeName="ShopModel.department_product">
+              <MappingFragment StoreEntitySet="department_product">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="department_Id" ColumnName="department_Id" />
+                <ScalarProperty Name="product_Id" ColumnName="product_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="people">
+            <EntityTypeMapping TypeName="ShopModel.person">
+              <MappingFragment StoreEntitySet="person">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="positon" ColumnName="positon" />
+                <ScalarProperty Name="shop_Id" ColumnName="shop_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="ShopModel.product">
+              <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="shops">
+            <EntityTypeMapping TypeName="ShopModel.shop">
+              <MappingFragment StoreEntitySet="shop">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="class" ColumnName="class" />
+                <ScalarProperty Name="number" ColumnName="number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
