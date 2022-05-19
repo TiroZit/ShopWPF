@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3bcc504c3cb64e01963d5e880ff0f6a3" Name="Diagram1" >
+        <EntityTypeShape EntityType="ShopManagement.Shop" Width="1.5" PointX="7" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopManagement.Department" Width="1.5" PointX="5" PointY="3.125" />
+        <EntityTypeShape EntityType="ShopManagement.Base" Width="1.5" PointX="9" PointY="3.125" />
+        <EntityTypeShape EntityType="ShopManagement.Product" Width="1.5" PointX="7" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="ShopManagement.BaseShop" />
+        <AssociationConnector Association="ShopManagement.ProductBase" />
+        <AssociationConnector Association="ShopManagement.DepartmentShop" />
+        <AssociationConnector Association="ShopManagement.ProductDepartment" />
+        <EntityTypeShape EntityType="ShopManagement.Person" Width="1.5" PointX="7" PointY="0.5" />
+        <AssociationConnector Association="ShopManagement.PersonShop" />
+        <AssociationConnector Association="ShopManagement.PersonDepartment" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

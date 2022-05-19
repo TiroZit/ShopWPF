@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="ShopManagement.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="ShopManagementTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ShopManagement" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ShopManagementContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ShopSet" EntityType="ShopManagement.Shop" />
+          <EntitySet Name="DepartmentSet" EntityType="ShopManagement.Department" />
+          <EntitySet Name="BaseSet" EntityType="ShopManagement.Base" />
+          <EntitySet Name="ProductSet" EntityType="ShopManagement.Product" />
+          <AssociationSet Name="BaseShop" Association="ShopManagement.BaseShop">
+            <End Role="Base" EntitySet="BaseSet" />
+            <End Role="Shop" EntitySet="ShopSet" />
+          </AssociationSet>
+          <AssociationSet Name="ProductBase" Association="ShopManagement.ProductBase">
+            <End Role="Product" EntitySet="ProductSet" />
+            <End Role="Base" EntitySet="BaseSet" />
+          </AssociationSet>
+          <AssociationSet Name="DepartmentShop" Association="ShopManagement.DepartmentShop">
+            <End Role="Department" EntitySet="DepartmentSet" />
+            <End Role="Shop" EntitySet="ShopSet" />
+          </AssociationSet>
+          <AssociationSet Name="ProductDepartment" Association="ShopManagement.ProductDepartment">
+            <End Role="Product" EntitySet="ProductSet" />
+            <End Role="Department" EntitySet="DepartmentSet" />
+          </AssociationSet>
+          <EntitySet Name="PersonSet" EntityType="ShopManagement.Person" />
+          <AssociationSet Name="PersonShop" Association="ShopManagement.PersonShop">
+            <End Role="Person" EntitySet="PersonSet" />
+            <End Role="Shop" EntitySet="ShopSet" />
+          </AssociationSet>
+          <AssociationSet Name="PersonDepartment" Association="ShopManagement.PersonDepartment">
+            <End Role="Person" EntitySet="PersonSet" />
+            <End Role="Department" EntitySet="DepartmentSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Shop">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="WorkingMode" Type="String" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" />
+          <NavigationProperty Name="Base" Relationship="ShopManagement.BaseShop" FromRole="Shop" ToRole="Base" />
+          <NavigationProperty Name="Department" Relationship="ShopManagement.DepartmentShop" FromRole="Shop" ToRole="Department" />
+          <Property Name="Class" Type="String" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="ShopManagement.PersonShop" FromRole="Shop" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Shop" Relationship="ShopManagement.DepartmentShop" FromRole="Department" ToRole="Shop" />
+          <NavigationProperty Name="Product" Relationship="ShopManagement.ProductDepartment" FromRole="Department" ToRole="Product" />
+          <NavigationProperty Name="Person" Relationship="ShopManagement.PersonDepartment" FromRole="Department" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Base">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Shop" Relationship="ShopManagement.BaseShop" FromRole="Base" ToRole="Shop" />
+          <NavigationProperty Name="Product" Relationship="ShopManagement.ProductBase" FromRole="Base" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Base" Relationship="ShopManagement.ProductBase" FromRole="Product" ToRole="Base" />
+          <NavigationProperty Name="Department" Relationship="ShopManagement.ProductDepartment" FromRole="Product" ToRole="Department" />
+          <Property Name="Category" Type="String" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="BaseShop">
+          <End Type="ShopManagement.Base" Role="Base" Multiplicity="*" />
+          <End Type="ShopManagement.Shop" Role="Shop" Multiplicity="*" />
+        </Association>
+        <Association Name="ProductBase">
+          <End Type="ShopManagement.Product" Role="Product" Multiplicity="*" />
+          <End Type="ShopManagement.Base" Role="Base" Multiplicity="1" />
+        </Association>
+        <Association Name="DepartmentShop">
+          <End Type="ShopManagement.Department" Role="Department" Multiplicity="*" />
+          <End Type="ShopManagement.Shop" Role="Shop" Multiplicity="*" />
+        </Association>
+        <Association Name="ProductDepartment">
+          <End Type="ShopManagement.Product" Role="Product" Multiplicity="*" />
+          <End Type="ShopManagement.Department" Role="Department" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" />
+          <Property Name="LastName" Type="String" Nullable="false" />
+          <Property Name="Post" Type="String" Nullable="false" />
+          <NavigationProperty Name="Shop" Relationship="ShopManagement.PersonShop" FromRole="Person" ToRole="Shop" />
+          <NavigationProperty Name="Department" Relationship="ShopManagement.PersonDepartment" FromRole="Person" ToRole="Department" />
+        </EntityType>
+        <Association Name="PersonShop">
+          <End Type="ShopManagement.Person" Role="Person" Multiplicity="1" />
+          <End Type="ShopManagement.Shop" Role="Shop" Multiplicity="1" />
+        </Association>
+        <Association Name="PersonDepartment">
+          <End Type="ShopManagement.Person" Role="Person" Multiplicity="1" />
+          <End Type="ShopManagement.Department" Role="Department" Multiplicity="1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="ShopManagement" />
+        <Alias Key="Target" Value="ShopManagement.Store" />
+        <EntityContainerMapping CdmEntityContainer="ShopManagementContainer" StorageEntityContainer="ShopManagementTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
