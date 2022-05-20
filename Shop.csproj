@@ -157,7 +157,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Scratch.txt" />
+    <None Include="readme.md" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />
