@@ -16,24 +16,47 @@
      FontFamily="{DynamicResource MaterialDesignFont}">
   <Grid>
     <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="100*"/>
-      <ColumnDefinition Width="1181*"/>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition/>
     </Grid.ColumnDefinitions>
-    <DataGrid x:Name="DGridShop" Grid.Column="2" AutoGenerateColumns="False">
-      <DataGrid.Columns>
-        <materialDesign:DataGridTextColumn
-                        Header="тип"
-                        ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
-          <materialDesign:DataGridTextColumn.Binding>
-            <Binding Path="class">
-              <Binding.ValidationRules>
-              </Binding.ValidationRules>
-            </Binding>
-          </materialDesign:DataGridTextColumn.Binding>
-        </materialDesign:DataGridTextColumn>
-      </DataGrid.Columns>
-    </DataGrid>
+    <TabControl
+      Grid.Column="0"
+      materialDesign:ColorZoneAssist.Mode="Standard"
+      materialDesign:ShadowAssist.ShadowDepth="Depth3"
+      Style="{StaticResource MaterialDesignNavigationRailTabControl}">
+      <TabItem>
+        <TabItem.Header>
+          <StackPanel
+          Width="auto"
+          Height="auto">
+            <materialDesign:PackIcon
+            Width="24"
+            Height="24"
+            HorizontalAlignment="Center"
+            Kind="Store" />
+            <TextBlock
+            HorizontalAlignment="Center"
+            Text="Главная" />
+          </StackPanel>
+        </TabItem.Header>
+      </TabItem>
+      <TabItem>
+        <TabItem.Header>
+          <StackPanel
+          Width="auto"
+          Height="auto">
+            <materialDesign:PackIcon
+            Width="24"
+            Height="24"
+            HorizontalAlignment="Center"
+            Kind="ClockOutline" />
+            <TextBlock
+            HorizontalAlignment="Center"
+            Text="Отделы" />
+          </StackPanel>
+        </TabItem.Header>
+      </TabItem>
+    </TabControl>
     
   </Grid>
 </Window>

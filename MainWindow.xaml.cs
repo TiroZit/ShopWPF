@@ -21,7 +21,7 @@ namespace Shop
     public MainWindow()
     {
       InitializeComponent();
-      DGridShop.ItemsSource = ShopEntities.GetContext().shops.ToList();
+      //DGridShop.ItemsSource = ShopEntities.GetContext().shops.ToList();
     }
   }
 }

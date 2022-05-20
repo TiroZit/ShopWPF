@@ -15,19 +15,10 @@ namespace Shop.DataAccess
     
     public partial class ShopEntities : DbContext
     {
-    private static ShopEntities _context;
         public ShopEntities()
             : base("name=ShopEntities")
         {
         }
-    public static ShopEntities GetContext()
-    {
-      if( _context == null)
-      {
-        _context = new ShopEntities();
-      }
-      return _context;
-    }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
