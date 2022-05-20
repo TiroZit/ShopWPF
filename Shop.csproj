@@ -159,7 +159,9 @@
   <ItemGroup>
     <Resource Include="Scratch.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Pages\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="DataAccess\ShopModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

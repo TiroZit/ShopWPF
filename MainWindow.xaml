@@ -6,7 +6,7 @@
      xmlns:local="clr-namespace:Shop"
      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
      mc:Ignorable="d"
-     Title="MainWindow" Height="720" Width="1280"
+     Title="MainWindow" Width="1280" Height="720"
      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
      TextElement.FontWeight="Regular"
      TextElement.FontSize="24"
@@ -15,12 +15,25 @@
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}">
   <Grid>
-    <materialDesign:Card Padding="32" Margin="16">
-      <Button Cursor="Hand" Width="100" Height="50">
-        <materialDesign:PackIcon Kind="Face" Width="30" Height="30">
-        </materialDesign:PackIcon>
-      </Button>
-    </materialDesign:Card>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="100*"/>
+      <ColumnDefinition Width="1181*"/>
+    </Grid.ColumnDefinitions>
+    <DataGrid x:Name="DGridShop" Grid.Column="2" AutoGenerateColumns="False">
+      <DataGrid.Columns>
+        <materialDesign:DataGridTextColumn
+                        Header="тип"
+                        ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
+          <materialDesign:DataGridTextColumn.Binding>
+            <Binding Path="class">
+              <Binding.ValidationRules>
+              </Binding.ValidationRules>
+            </Binding>
+          </materialDesign:DataGridTextColumn.Binding>
+        </materialDesign:DataGridTextColumn>
+      </DataGrid.Columns>
+    </DataGrid>
     
   </Grid>
 </Window>
