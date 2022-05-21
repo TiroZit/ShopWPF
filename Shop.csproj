@@ -121,8 +121,29 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\Bases.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Departments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Main.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\Bases.xaml.cs">
+      <DependentUpon>Bases.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Departments.xaml.cs">
+      <DependentUpon>Departments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Main.xaml.cs">
+      <DependentUpon>Main.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -159,9 +180,7 @@
   <ItemGroup>
     <None Include="readme.md" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pages\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="DataAccess\ShopModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -173,6 +192,7 @@
       <DependentUpon>ShopModel.edmx</DependentUpon>
       <LastGenOutput>ShopModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="favicon.ico" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

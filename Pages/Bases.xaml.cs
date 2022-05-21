@@ -1,6 +1,4 @@
-﻿using Shop.DataAccess;
-using Shop.Pages;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Shop
+namespace Shop.Pages
 {
-  public partial class MainWindow : Window
+  /// <summary>
+  /// Логика взаимодействия для Bases.xaml
+  /// </summary>
+  public partial class Bases : Page
   {
-    public MainWindow()
+    public Bases()
     {
       InitializeComponent();
-      MainPage.Content = new Main();
-      DepartmentsPage.Content = new Departments();
-      BasesPage.Content = new Bases();
-      //DGridShop.ItemsSource = ShopEntities.GetContext().shops.ToList();
     }
   }
 }

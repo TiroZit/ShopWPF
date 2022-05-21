@@ -6,7 +6,9 @@
      xmlns:local="clr-namespace:Shop"
      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
      mc:Ignorable="d"
-     Title="MainWindow" Width="1280" Height="720"
+     WindowStartupLocation="CenterScreen"
+     Title="Магазин" Width="1280" Height="720"
+     Icon="favicon.ico"
      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
      TextElement.FontWeight="Regular"
      TextElement.FontSize="24"
@@ -16,11 +18,9 @@
      FontFamily="{DynamicResource MaterialDesignFont}">
   <Grid>
     <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="Auto"/>
       <ColumnDefinition/>
     </Grid.ColumnDefinitions>
     <TabControl
-      Grid.Column="0"
       materialDesign:ColorZoneAssist.Mode="Standard"
       materialDesign:ShadowAssist.ShadowDepth="Depth3"
       Style="{StaticResource MaterialDesignNavigationRailTabControl}">
@@ -39,6 +39,7 @@
             Text="Главная" />
           </StackPanel>
         </TabItem.Header>
+        <Frame x:Name="MainPage"/>
       </TabItem>
       <TabItem>
         <TabItem.Header>
@@ -55,8 +56,25 @@
             Text="Отделы" />
           </StackPanel>
         </TabItem.Header>
+        <Frame x:Name="DepartmentsPage"/>
+      </TabItem>
+      <TabItem>
+        <TabItem.Header>
+          <StackPanel
+          Width="auto"
+          Height="auto">
+            <materialDesign:PackIcon
+            Width="24"
+            Height="24"
+            HorizontalAlignment="Center"
+            Kind="Truck" />
+            <TextBlock
+            HorizontalAlignment="Center"
+            Text="Базы" />
+          </StackPanel>
+        </TabItem.Header>
+        <Frame x:Name="BasesPage"/>
       </TabItem>
     </TabControl>
-    
   </Grid>
 </Window>
