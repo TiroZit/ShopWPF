@@ -12,10 +12,10 @@ namespace Shop.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class @base
+    public partial class basis
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public @base()
+        public basis()
         {
             this.base_product = new HashSet<base_product>();
         }

@@ -4,11 +4,26 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Shop.Pages"
+     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Departments">
-
-    <Grid>
-    <TextBlock>department</TextBlock>
-    </Grid>
+      TextElement.FontWeight="Regular"
+     TextElement.FontSize="24"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     FontFamily="{DynamicResource MaterialDesignFont}"
+     Title="Departments">
+  <ListView x:Name="DGridDepartment"
+  ItemsSource="{Binding Items1}">
+    <ListView.View>
+      <GridView>
+        <GridViewColumn
+        DisplayMemberBinding="{Binding name}"
+        Header="Отдел" />
+        <GridViewColumn 
+        DisplayMemberBinding="{Binding person.first_name}"
+        Header="Заведующий" />
+      </GridView>
+    </ListView.View>
+  </ListView>
 </Page>

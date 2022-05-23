@@ -20,7 +20,7 @@ namespace Shop.DataAccess
         public int base_Id { get; set; }
         public int product_Id { get; set; }
     
-        public virtual @base @base { get; set; }
         public virtual product product { get; set; }
+        public virtual basis basis { get; set; }
     }
 }

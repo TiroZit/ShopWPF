@@ -50,7 +50,7 @@
             Width="24"
             Height="24"
             HorizontalAlignment="Center"
-            Kind="ClockOutline" />
+            Kind="InboxMultiple" />
             <TextBlock
             HorizontalAlignment="Center"
             Text="Отделы" />

@@ -18,15 +18,17 @@ namespace Shop.DataAccess
         public person()
         {
             this.departments = new HashSet<department>();
+            this.shops = new HashSet<shop>();
         }
     
         public int Id { get; set; }
-        public string name { get; set; }
-        public string positon { get; set; }
-        public int shop_Id { get; set; }
+        public string first_name { get; set; }
+        public string last_name { get; set; }
+        public string position { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<department> departments { get; set; }
-        public virtual shop shop { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<shop> shops { get; set; }
     }
 }

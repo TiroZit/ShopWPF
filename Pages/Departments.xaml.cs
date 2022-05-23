@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shop.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,11 @@ namespace Shop.Pages
     public Departments()
     {
       InitializeComponent();
+      DGridDepartment.ItemsSource = ShopEntities.GetContext().departments.ToList();
+    }
+    private void Sample1_DialogHost_OnDialogClosing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs)
+    {
+
     }
   }
 }

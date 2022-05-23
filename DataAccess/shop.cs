@@ -17,20 +17,18 @@ namespace Shop.DataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public shop()
         {
-            this.bases = new HashSet<@base>();
+            this.bases = new HashSet<basis>();
             this.departments = new HashSet<department>();
-            this.people = new HashSet<person>();
         }
     
         public int Id { get; set; }
         public string @class { get; set; }
-        public string number { get; set; }
+        public int person_Id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<@base> bases { get; set; }
+        public virtual ICollection<basis> bases { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<department> departments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<person> people { get; set; }
+        public virtual person person { get; set; }
     }
 }
