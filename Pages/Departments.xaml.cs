@@ -21,14 +21,59 @@ namespace Shop.Pages
   /// </summary>
   public partial class Departments : Page
   {
+    private department _currentDepartment = new department();
     public Departments()
     {
       InitializeComponent();
-      DGridDepartment.ItemsSource = ShopEntities.GetContext().departments.ToList();
+      using (ShopEntities db = new ShopEntities())
+      {
+        // получаем объекты из бд и выводим на консоль
+        var department_product = db.department_product.ToList();
+        foreach (department_product d in department_product)
+        {
+          int currentPrice = d.price;
+          int quantity = d.quantity;
+          int sumPrice = currentPrice * quantity;
+          //db.department_product.Add(sumPrice);
+        }
+      }
+      //DGridDepartment.ItemsSource = ShopEntities.GetContext().department_product.ToList();
+      DataContext = _currentDepartment;
+      //ComboBoxManager.ItemsSource = ShopEntities.GetContext().people.ToList();
+
     }
     private void Sample1_DialogHost_OnDialogClosing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs)
     {
 
+    }
+
+    private void DFilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+
+    }
+
+    private void BtnAdd_Click(object sender, RoutedEventArgs e)
+    {
+      if(_currentDepartment.Id == 0)
+        ShopEntities.GetContext().departments.Add(_currentDepartment);
+      try
+      {
+        ShopEntities.GetContext().SaveChanges();
+        MessageBox.Show("Отдел добавлен");
+      }
+      catch(Exception ex)
+      {
+        MessageBox.Show(ex.Message.ToString());
+      }
+    }
+
+    private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+    {
+      if(Visibility == Visibility.Visible)
+      {
+        ShopEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+        DGridDepartment.ItemsSource = ShopEntities.GetContext().department_product.ToList();
+      }
     }
   }
 }

@@ -1,29 +1,117 @@
-﻿<Page x:Class="Shop.Pages.Departments"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Shop.Pages"
+﻿<Page 
+  x:Class="Shop.Pages.Departments"
+     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+     xmlns:local="clr-namespace:Shop.Pages"
      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      TextElement.FontWeight="Regular"
-     TextElement.FontSize="24"
+     mc:Ignorable="d"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="14"
+     d:DesignHeight="450" d:DesignWidth="800"
      TextOptions.TextFormattingMode="Ideal"
      TextOptions.TextRenderingMode="Auto"
      FontFamily="{DynamicResource MaterialDesignFont}"
-     Title="Departments">
-  <ListView x:Name="DGridDepartment"
-  ItemsSource="{Binding Items1}">
-    <ListView.View>
-      <GridView>
-        <GridViewColumn
-        DisplayMemberBinding="{Binding name}"
+     IsVisibleChanged="Page_IsVisibleChanged">
+  <materialDesign:DialogHost
+  DialogClosing="Sample1_DialogHost_OnDialogClosing"
+  DialogTheme="Inherit">
+    <Grid Margin="15">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*"></RowDefinition>
+        <RowDefinition Height="auto"></RowDefinition>
+      </Grid.RowDefinitions>
+      <!--<StackPanel Width="260" HorizontalAlignment="Left">
+      <ComboBox
+    Name="DFilterComboBox"
+    Style="{StaticResource MaterialDesignOutlinedComboBox}"
+    IsEnabled="{Binding Path=IsChecked, ElementName=DFilterComboBoxEnabledCheckBox}"
+    materialDesign:HintAssist.Hint="Сортировать:"
+    ItemsSource="{Binding ShortStringList}"
+    Width="256" SelectionChanged="DFilterComboBox_SelectionChanged" />
+    </StackPanel>-->
+      <ListView x:Name="DGridDepartment" Grid.Row="0"
+  ItemsSource="{Binding Items1}" VerticalAlignment="Top">
+        <ListView.View>
+          <GridView>
+            <GridViewColumn
+        DisplayMemberBinding="{Binding department.name}"
         Header="Отдел" />
-        <GridViewColumn 
-        DisplayMemberBinding="{Binding person.first_name}"
+            <GridViewColumn 
+        DisplayMemberBinding="{Binding department.person.first_name}"
         Header="Заведующий" />
-      </GridView>
-    </ListView.View>
-  </ListView>
+            <GridViewColumn 
+        DisplayMemberBinding="{Binding product.name}"
+        Header="Товар" />
+            <GridViewColumn 
+        DisplayMemberBinding="{Binding quantity}"
+        Header="Кол-во" />
+            <GridViewColumn 
+        DisplayMemberBinding="{Binding price}"
+        Header="Цена шт." />
+            <!--<GridViewColumn 
+        DisplayMemberBinding="{Binding sumPrice}"
+        Header="Суммарная цена" />-->
+          </GridView>
+        </ListView.View>
+      </ListView>
+      <DockPanel Grid.Row="1" HorizontalAlignment="Left">
+        <Button
+          Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+          Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+          ToolTip="Добавить отдел"
+          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+          <materialDesign:PackIcon
+            Kind="ArchivePlusOutline" Width="32" Height="32" />
+        </Button>
+      </DockPanel>
+    </Grid>
+    <materialDesign:DialogHost.DialogContent>
+      <StackPanel
+      Margin="20">
+        <TextBlock
+        Text="Добавление отдела" Margin="0 0 0 15" />
+        <TextBox
+          materialDesign:HintAssist.Hint="Название"
+          FontSize="16"
+          Text="{Binding department.name}"
+          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+          VerticalAlignment="Center" />
+        
+        <StackPanel
+          Orientation="Horizontal"
+          HorizontalAlignment="Right"
+          Margin="0 15 0 0">
+          <Button
+            x:Name="BtnAdd"
+            Click="BtnAdd_Click"
+          Style="{StaticResource MaterialDesignFlatButton}"
+          IsDefault="True"
+          Margin="0 8 8 0"
+          Content="Добавить"
+          Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+            <Button.CommandParameter>
+              <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                True
+              </system:Boolean>
+            </Button.CommandParameter>
+          </Button>
+          <Button
+          Style="{StaticResource MaterialDesignFlatButton}"
+          IsCancel="True"
+          Margin="0 8 8 0"
+          Content="Отмена"
+          Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+            <Button.CommandParameter>
+              <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                False
+              </system:Boolean>
+            </Button.CommandParameter>
+          </Button>
+        </StackPanel>
+      </StackPanel>
+    </materialDesign:DialogHost.DialogContent>
+  </materialDesign:DialogHost>
 </Page>
