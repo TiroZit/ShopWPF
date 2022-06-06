@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shop.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,38 @@ namespace Shop.Pages
   /// </summary>
   public partial class Main : Page
   {
+    private department _currentDepartment = new department();
     public Main()
     {
       InitializeComponent();
+      DataContext = _currentDepartment;
+    }
+    private void Sample1_DialogHost_OnDialogClosing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs)
+    {
+
+    }
+    private void BtnAdd_Click(object sender, RoutedEventArgs e)
+    {
+      if (_currentDepartment.Id == 0)
+        ShopEntities.GetContext().departments.Add(_currentDepartment);
+      try
+      {
+        ShopEntities.GetContext().SaveChanges();
+        MessageBox.Show("Отдел добавлен!");
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message.ToString());
+      }
+    }
+
+    private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+    {
+      if (Visibility == Visibility.Visible)
+      {
+        ShopEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+        DGridDepartment.ItemsSource = ShopEntities.GetContext().departments.ToList();
+      }
     }
   }
 }

@@ -3,11 +3,125 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Shop.Pages"
+      xmlns:local="clr-namespace:Shop.Pages" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Main">
+      Title="Main"
+      IsVisibleChanged="Page_IsVisibleChanged">
 
-    <Grid>
+  <Grid Margin="15">
+      <materialDesign:Card Grid.Column="1" Height="600">
+        <materialDesign:DialogHost>
+        <Grid Margin="10">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+          </Grid.RowDefinitions>
+          <ListView x:Name="DGridDepartment" Grid.Row="0"
+  ItemsSource="{Binding Items1}" VerticalAlignment="Top">
+            <ListView.View>
+              <GridView>
+                <GridViewColumn
+        DisplayMemberBinding="{Binding name}"
+        Header="Отдел" />
+                <GridViewColumn 
+        DisplayMemberBinding="{Binding person.name}"
+        Header="Заведующий" />
+              </GridView>
+            </ListView.View>
+          </ListView>
+          <DockPanel Grid.Row="1" HorizontalAlignment="Left">
+            <Button
+          Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+          Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+          ToolTip="Добавить отдел"
+          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+              <materialDesign:PackIcon
+            Kind="ArchivePlusOutline" Width="32" Height="32" />
+            </Button>
+          </DockPanel>
+        </Grid>
+        <materialDesign:DialogHost.DialogContent>
+          <StackPanel
+      Margin="20">
+            <TextBlock
+        Text="Добавление отдела" Margin="0 0 0 15" />
+            <TextBox
+          materialDesign:HintAssist.Hint="Название"
+          FontSize="16"
+          Text="{Binding name}"
+          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+          VerticalAlignment="Center" />
+            <TextBox
+          materialDesign:HintAssist.Hint="Номер магазина"
+          FontSize="16"
+          Text="{Binding shop_Id}"
+          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+          VerticalAlignment="Center" />
+            <TextBox
+          materialDesign:HintAssist.Hint="Номер заведующего"
+          FontSize="16"
+          Text="{Binding person_Id}"
+          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+          VerticalAlignment="Center" />
+            <!--<ComboBox x:Name="ComboBoxManager" DisplayMemberPath="Id" Text="person_Id"
+  materialDesign:HintAssist.Hint="Заведующий"
+  ItemsSource="{Binding LongListToTestComboVirtualization}"
+  Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+              <ComboBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <VirtualizingStackPanel />
+                </ItemsPanelTemplate>
+              </ComboBox.ItemsPanel>
+            </ComboBox>-->
+            <!--<ComboBox x:Name="ComboBoxShop" DisplayMemberPath="Id" 
+  materialDesign:HintAssist.Hint="Заведующий"
+  ItemsSource="{Binding LongListToTestComboVirtualization}"
+  Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+          <ComboBox.ItemsPanel>
+            <ItemsPanelTemplate>
+              <VirtualizingStackPanel />
+            </ItemsPanelTemplate>
+          </ComboBox.ItemsPanel>
+        </ComboBox>-->
+            <StackPanel
+          Orientation="Horizontal"
+          HorizontalAlignment="Right"
+          Margin="0 15 0 0">
+              <Button
+            x:Name="BtnAdd"
+            Click="BtnAdd_Click"
+          Style="{StaticResource MaterialDesignFlatButton}"
+          IsDefault="True"
+          Margin="0 8 8 0"
+          Content="Добавить"
+          Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                <Button.CommandParameter>
+                  <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                    True
+                  </system:Boolean>
+                </Button.CommandParameter>
+              </Button>
+              <Button
+          Style="{StaticResource MaterialDesignFlatButton}"
+          IsCancel="True"
+          Margin="0 8 8 0"
+          Content="Отмена"
+          Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                <Button.CommandParameter>
+                  <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                    False
+                  </system:Boolean>
+                </Button.CommandParameter>
+              </Button>
+            </StackPanel>
+          </StackPanel>
+        </materialDesign:DialogHost.DialogContent>
+      </materialDesign:DialogHost>
+      </materialDesign:Card>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width="300"/>
+    </Grid.ColumnDefinitions>
   </Grid>
 </Page>

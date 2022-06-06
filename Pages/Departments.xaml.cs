@@ -21,7 +21,7 @@ namespace Shop.Pages
   /// </summary>
   public partial class Departments : Page
   {
-    private department _currentDepartment = new department();
+    //private department _currentDepartment = new department();
     public Departments()
     {
       InitializeComponent();
@@ -37,43 +37,37 @@ namespace Shop.Pages
           //db.department_product.Add(sumPrice);
         }
       }
-      //DGridDepartment.ItemsSource = ShopEntities.GetContext().department_product.ToList();
-      DataContext = _currentDepartment;
+      DGridDepartmentProduct.ItemsSource = ShopEntities.GetContext().department_product.ToList();
+      //DataContext = _currentDepartment;
       //ComboBoxManager.ItemsSource = ShopEntities.GetContext().people.ToList();
       //ComboBoxShop.ItemsSource = ShopEntities.GetContext().shops.ToList();
     }
-    private void Sample1_DialogHost_OnDialogClosing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs)
-    {
+    //private void Sample1_DialogHost_OnDialogClosing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs)
+    //{
 
-    }
+    //}
+    //private void BtnAdd_Click(object sender, RoutedEventArgs e)
+    //{
+    //  if(_currentDepartment.Id == 0)
+    //    ShopEntities.GetContext().departments.Add(_currentDepartment);
+    //  try
+    //  {
+    //    ShopEntities.GetContext().SaveChanges();
+    //    MessageBox.Show("Отдел добавлен");
+    //  }
+    //  catch(Exception ex)
+    //  {
+    //    MessageBox.Show(ex.Message.ToString());
+    //  }
+    //}
 
-    private void DFilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-
-    }
-
-    private void BtnAdd_Click(object sender, RoutedEventArgs e)
-    {
-      if(_currentDepartment.Id == 0)
-        ShopEntities.GetContext().departments.Add(_currentDepartment);
-      try
-      {
-        ShopEntities.GetContext().SaveChanges();
-        MessageBox.Show("Отдел добавлен");
-      }
-      catch(Exception ex)
-      {
-        MessageBox.Show(ex.Message.ToString());
-      }
-    }
-
-    private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-    {
-      if(Visibility == Visibility.Visible)
-      {
-        ShopEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
-        DGridDepartment.ItemsSource = ShopEntities.GetContext().department_product.ToList();
-      }
-    }
+    //private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+    //{
+    //  if(Visibility == Visibility.Visible)
+    //  {
+    //    ShopEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+    //    DGridDepartmentProduct.ItemsSource = ShopEntities.GetContext().department_product.ToList();
+    //  }
+    //}
   }
 }
