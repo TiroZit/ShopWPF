@@ -40,7 +40,7 @@
         DisplayMemberBinding="{Binding department.name}"
         Header="Отдел" />
             <GridViewColumn 
-        DisplayMemberBinding="{Binding department.person.first_name}"
+        DisplayMemberBinding="{Binding department.person.name}"
         Header="Заведующий" />
             <GridViewColumn 
         DisplayMemberBinding="{Binding product.name}"
@@ -76,10 +76,41 @@
         <TextBox
           materialDesign:HintAssist.Hint="Название"
           FontSize="16"
-          Text="{Binding department.name}"
+          Text="{Binding name}"
           Style="{StaticResource MaterialDesignFloatingHintTextBox}"
           VerticalAlignment="Center" />
-        
+        <TextBox
+          materialDesign:HintAssist.Hint="Название"
+          FontSize="16"
+          Text="{Binding shop_Id}"
+          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+          VerticalAlignment="Center" />
+        <!--<TextBox
+          materialDesign:HintAssist.Hint="Название"
+          FontSize="16"
+          Text="{Binding person_Id}"
+          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+          VerticalAlignment="Center" />-->
+        <ComboBox x:Name="ComboBoxManager" DisplayMemberPath="Id" Text="person_Id"
+  materialDesign:HintAssist.Hint="Заведующий"
+  ItemsSource="{Binding LongListToTestComboVirtualization}"
+  Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+          <ComboBox.ItemsPanel>
+            <ItemsPanelTemplate>
+              <VirtualizingStackPanel />
+            </ItemsPanelTemplate>
+          </ComboBox.ItemsPanel>
+        </ComboBox>
+        <!--<ComboBox x:Name="ComboBoxShop" DisplayMemberPath="Id" 
+  materialDesign:HintAssist.Hint="Заведующий"
+  ItemsSource="{Binding LongListToTestComboVirtualization}"
+  Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+          <ComboBox.ItemsPanel>
+            <ItemsPanelTemplate>
+              <VirtualizingStackPanel />
+            </ItemsPanelTemplate>
+          </ComboBox.ItemsPanel>
+        </ComboBox>-->
         <StackPanel
           Orientation="Horizontal"
           HorizontalAlignment="Right"

@@ -22,9 +22,8 @@ namespace Shop.DataAccess
         }
     
         public int Id { get; set; }
-        public string first_name { get; set; }
-        public string last_name { get; set; }
         public string position { get; set; }
+        public string name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<department> departments { get; set; }

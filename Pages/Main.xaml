@@ -9,6 +9,5 @@
       Title="Main">
 
     <Grid>
-    <Button Content="main" Margin="206,209,206,209"/>
   </Grid>
 </Page>

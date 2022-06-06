@@ -9,35 +9,36 @@
 
 namespace Shop.DataAccess
 {
-  using System;
-  using System.Data.Entity;
-  using System.Data.Entity.Infrastructure;
-
-  public partial class ShopEntities : DbContext
-  {
-    private static ShopEntities _context;
-    public static ShopEntities GetContext()
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    
+    public partial class ShopEntities : DbContext
+    { 
+        private static ShopEntities _context;
+        public ShopEntities()
+            : base("name=ShopEntities")
+        {
+        }
+        public static ShopEntities GetContext()
     {
-      if( _context == null )
+      if (_context == null)
+      {
         _context = new ShopEntities();
+      }
       return _context;
     }
-    public ShopEntities()
-        : base("name=ShopEntities")
-    {
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            throw new UnintentionalCodeFirstException();
+        }
+    
+        public virtual DbSet<base_product> base_product { get; set; }
+        public virtual DbSet<basis> bases { get; set; }
+        public virtual DbSet<department_product> department_product { get; set; }
+        public virtual DbSet<department> departments { get; set; }
+        public virtual DbSet<person> people { get; set; }
+        public virtual DbSet<product> products { get; set; }
+        public virtual DbSet<shop> shops { get; set; }
     }
-
-    protected override void OnModelCreating(DbModelBuilder modelBuilder)
-    {
-      throw new UnintentionalCodeFirstException();
-    }
-
-    public virtual DbSet<base_product> base_product { get; set; }
-    public virtual DbSet<basis> bases { get; set; }
-    public virtual DbSet<department_product> department_product { get; set; }
-    public virtual DbSet<department> departments { get; set; }
-    public virtual DbSet<person> people { get; set; }
-    public virtual DbSet<product> products { get; set; }
-    public virtual DbSet<shop> shops { get; set; }
-  }
 }

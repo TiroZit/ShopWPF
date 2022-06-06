@@ -40,7 +40,7 @@ namespace Shop.Pages
       //DGridDepartment.ItemsSource = ShopEntities.GetContext().department_product.ToList();
       DataContext = _currentDepartment;
       //ComboBoxManager.ItemsSource = ShopEntities.GetContext().people.ToList();
-
+      //ComboBoxShop.ItemsSource = ShopEntities.GetContext().shops.ToList();
     }
     private void Sample1_DialogHost_OnDialogClosing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs)
     {
