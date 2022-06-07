@@ -25,6 +25,7 @@ namespace Shop.Pages
     public Main()
     {
       InitializeComponent();
+      DGridShop.ItemsSource = ShopEntities.GetContext().shops.ToList();
       DataContext = _currentDepartment;
     }
     private void Sample1_DialogHost_OnDialogClosing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs)
