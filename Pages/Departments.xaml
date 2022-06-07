@@ -17,10 +17,6 @@
      IsVisibleChanged="Page_IsVisibleChanged">
   <materialDesign:DialogHost>
     <Grid Margin="15">
-      <Grid.RowDefinitions>
-        <RowDefinition Height="*"></RowDefinition>
-        <!--<RowDefinition Height="auto"></RowDefinition>-->
-      </Grid.RowDefinitions>
       <DataGrid x:Name="DGridDepartmentProduct" AutoGenerateColumns="False" IsReadOnly="True" Margin="30" GridLinesVisibility="Horizontal" VerticalGridLinesBrush="Gray" HorizontalGridLinesBrush="Gray">
         <DataGrid.Columns>
           <DataGridTextColumn Header="Отдел" Binding="{Binding Path=department.name}"/>
@@ -39,7 +35,7 @@
                  Height="32"
                  ToolTip="Изменить цену">
                   <materialDesign:PackIcon
-                    Kind="PencilOutline" Width="16" Height="16" />
+                    Kind="PencilOutline" Width="24" Height="24" />
                   <Button.CommandParameter>
                     <StackPanel
                       Margin="20">
@@ -89,84 +85,6 @@
           </DataGridTemplateColumn>
         </DataGrid.Columns>
       </DataGrid>
-      <!--<ListView x:Name="" Grid.Row="0"
-  ItemsSource="{Binding Items1}" VerticalAlignment="Top">
-        <ListView.View>
-          <GridView>
-            <GridViewColumn
-        DisplayMemberBinding="{Binding }"
-        Header="" />
-            <GridViewColumn 
-        DisplayMemberBinding="{Binding }"
-        Header="" />
-            <GridViewColumn 
-        DisplayMemberBinding="{Binding }"
-        Header="" />
-            <GridViewColumn 
-        DisplayMemberBinding="{Binding }"
-        Header="" />
-            <GridViewColumn 
-        DisplayMemberBinding="{Binding }"
-        Header="" />
-            -->
-      <!--<GridViewColumn 
-        DisplayMemberBinding="{Binding sumPrice}"
-        Header="Суммарная цена" />-->
-      <!--
-          </GridView>
-        </ListView.View>
-      </ListView>-->
-      <!--<DockPanel Grid.Row="1" HorizontalAlignment="Left">
-        <Button
-          Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-          Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
-          ToolTip="Изменить цену"
-          <materialDesign:PackIcon
-            Kind="PencilOutline" Width="32" Height="32" />
-        </Button>
-      </DockPanel>-->
     </Grid>
-    <!--<materialDesign:DialogHost.DialogContent>
-      <StackPanel
-      Margin="20">
-        <TextBlock
-        Text="Изменение цены" Margin="0 0 0 15" />
-        <TextBox
-          FontSize="16"
-          Text="{Binding Path=price}"
-          VerticalAlignment="Center" />
-        <StackPanel
-          Orientation="Horizontal"
-          HorizontalAlignment="Right"
-          Margin="0 15 0 0">
-          <Button
-            x:Name="BtnSave"
-            Click="BtnSave_Click"
-          Style="{StaticResource MaterialDesignFlatButton}"
-          IsDefault="True"
-          Margin="0 8 8 0"
-          Content="Сохранить"
-          Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-            <Button.CommandParameter>
-              <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                True
-              </system:Boolean>
-            </Button.CommandParameter>
-          </Button>
-          <Button
-          Style="{StaticResource MaterialDesignFlatButton}"
-          IsCancel="True"
-          Margin="0 8 8 0"
-          Content="Отмена"
-          Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-            <Button.CommandParameter>
-              <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                False
-              </system:Boolean>
-            </Button.CommandParameter>
-          </Button>
-        </StackPanel>
-      </StackPanel>
-    </materialDesign:DialogHost.DialogContent>-->
   </materialDesign:DialogHost>
 </Page>
