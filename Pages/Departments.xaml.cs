@@ -37,15 +37,31 @@ namespace Shop.Pages
           //db.department_product.Add(sumPrice);
         }
       }
-      DGridDepartmentProduct.ItemsSource = ShopEntities.GetContext().department_product.ToList();
-      //DataContext = _currentDepartment;
-      //ComboBoxManager.ItemsSource = ShopEntities.GetContext().people.ToList();
-      //ComboBoxShop.ItemsSource = ShopEntities.GetContext().shops.ToList();
     }
-    //private void Sample1_DialogHost_OnDialogClosing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs)
-    //{
+    private void BtnSave_Click(object sender, RoutedEventArgs e)
+    {
+      try
+      {
+        ShopEntities.GetContext().SaveChanges();
+        MessageBox.Show("Данные обнавлены!");
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message.ToString());
+      }
+    }
+    private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+    {
+      if (Visibility == Visibility.Visible)
+      {
+        ShopEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+        DGridDepartmentProduct.ItemsSource = ShopEntities.GetContext().department_product.ToList();
+      }
+    }
+    private void Sample1_DialogHost_OnDialogClosing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs)
+    {
 
-    //}
+    }
     //private void BtnAdd_Click(object sender, RoutedEventArgs e)
     //{
     //  if(_currentDepartment.Id == 0)
