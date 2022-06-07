@@ -40,7 +40,7 @@
         Header="Заведующий" />
             <GridViewColumn 
         DisplayMemberBinding="{Binding product.name}"
-        Header="Товар" />
+        Header="Продукт" />
             <GridViewColumn 
         DisplayMemberBinding="{Binding quantity}"
         Header="Кол-во" />

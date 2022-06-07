@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shop.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace Shop.Pages
     public Bases()
     {
       InitializeComponent();
+      DGridBases.ItemsSource = ShopEntities.GetContext().base_product.ToList();
     }
   }
 }
