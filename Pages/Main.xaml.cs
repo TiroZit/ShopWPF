@@ -55,7 +55,6 @@ namespace Shop.Pages
       {
         ShopEntities.GetContext().SaveChanges();
         MessageBox.Show("Отдел добавлен!");
-        DGridDepartment.ItemsSource = ShopEntities.GetContext().departments.ToList();
       }
       catch (Exception ex)
       {
