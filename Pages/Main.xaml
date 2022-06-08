@@ -57,7 +57,7 @@
     </materialDesign:Card>
     <materialDesign:Card Grid.Column="1" Height="600">
         <materialDesign:DialogHost>
-        <Grid Margin="10">
+        <Grid Margin="10" Cursor="Hand">
           <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
@@ -84,6 +84,15 @@
               <materialDesign:PackIcon
             Kind="ArchivePlusOutline" Width="32" Height="32" />
             </Button>
+            <Button
+          Click="BtnRemove_Click"
+          Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+              Margin="20 0 0 0"
+          ToolTip="Удалить отдел"
+          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+              <materialDesign:PackIcon
+            Kind="ArchiveMinusOutline" Width="32" Height="32" />
+            </Button>
           </DockPanel>
         </Grid>
         <materialDesign:DialogHost.DialogContent>
@@ -109,26 +118,6 @@
           Text="{Binding person_Id}"
           Style="{StaticResource MaterialDesignFloatingHintTextBox}"
           VerticalAlignment="Center" />
-            <!--<ComboBox x:Name="ComboBoxManager" DisplayMemberPath="Id" Text="person_Id"
-  materialDesign:HintAssist.Hint="Заведующий"
-  ItemsSource="{Binding LongListToTestComboVirtualization}"
-  Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-              <ComboBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                  <VirtualizingStackPanel />
-                </ItemsPanelTemplate>
-              </ComboBox.ItemsPanel>
-            </ComboBox>-->
-            <!--<ComboBox x:Name="ComboBoxShop" DisplayMemberPath="Id" 
-  materialDesign:HintAssist.Hint="Заведующий"
-  ItemsSource="{Binding LongListToTestComboVirtualization}"
-  Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-          <ComboBox.ItemsPanel>
-            <ItemsPanelTemplate>
-              <VirtualizingStackPanel />
-            </ItemsPanelTemplate>
-          </ComboBox.ItemsPanel>
-        </ComboBox>-->
             <StackPanel
           Orientation="Horizontal"
           HorizontalAlignment="Right"

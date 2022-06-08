@@ -21,10 +21,38 @@ namespace Shop.Pages
   /// </summary>
   public partial class Bases : Page
   {
+    private department_product _currentProduct = new department_product();
+
     public Bases()
     {
       InitializeComponent();
-      DGridBases.ItemsSource = ShopEntities.GetContext().base_product.ToList();
+      DataContext = _currentProduct;
+    }
+    private void Sample1_DialogHost_OnDialogClosing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs)
+    {
+
+    }
+    private void BtnAdd_Click(object sender, RoutedEventArgs e)
+    {
+      if (_currentProduct.Id == 0)
+        ShopEntities.GetContext().department_product.Add(_currentProduct);
+      try
+      {
+        ShopEntities.GetContext().SaveChanges();
+        MessageBox.Show("Продукт куплен!");
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message.ToString());
+      }
+    }
+    private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+    {
+      if (Visibility == Visibility.Visible)
+      {
+        ShopEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+        DGridBases.ItemsSource = ShopEntities.GetContext().base_product.ToList();
+      }
     }
   }
 }
